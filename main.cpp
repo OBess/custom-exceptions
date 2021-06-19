@@ -147,7 +147,6 @@ std::string toString(const Errors &code)
    case Errors::FILE_CLOSE_FAILED:
       text = "FILE_CLOSE_FAILED";
       break;
-
    default:
       text = "SUCCESSFUL";
       break;
