@@ -5,7 +5,7 @@
 
 struct fileOpenFailed : public std::exception
 {
-   const char *what() const override
+   const char *what() const noexcept override
    {
       return "File is exist or filename is not right.";
    }
@@ -13,7 +13,7 @@ struct fileOpenFailed : public std::exception
 
 struct sizeDeterminationFailed : public std::exception
 {
-   const char *what() const override
+   const char *what() const noexcept override
    {
       return "Size of file is small.";
    }
@@ -21,7 +21,7 @@ struct sizeDeterminationFailed : public std::exception
 
 struct memoryAllocationFailed : public std::exception
 {
-   const char *what() const override
+   const char *what() const noexcept override
    {
       return "Memory can not be allocated.";
    }
@@ -29,7 +29,7 @@ struct memoryAllocationFailed : public std::exception
 
 struct readFailed : public std::exception
 {
-   const char *what() const override
+   const char *what() const noexcept override
    {
       return "Can not read file.";
    }
@@ -37,7 +37,7 @@ struct readFailed : public std::exception
 
 struct fileClosedFailed : public std::exception
 {
-   const char *what() const override
+   const char *what() const noexcept override
    {
       return "Can not close file.";
    }
