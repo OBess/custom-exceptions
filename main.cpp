@@ -17,8 +17,10 @@ enum Errors
 };
 
 // Prototypes
-void read_file_try(const std::string path);
-Errors read_file_code(const std::string path);
+static void read_file_try(const std::string path);
+static Errors read_file_code(const std::string path);
+
+static std::string toString(const Errors &code);
 
 int main()
 {
@@ -27,7 +29,7 @@ int main()
    read_file_try(filename);
 
    Errors errorCode = read_file_code(filename);
-   std::cout << errorCode << std::endl;
+   std::cout << "error code: " << toString(errorCode) << std::endl;
 
    return EXIT_SUCCESS;
 }
@@ -122,4 +124,34 @@ Errors read_file_code(const std::string path)
       code = Errors::FILE_OPEN_FAILED;
 
    return code;
+}
+
+std::string toString(const Errors &code)
+{
+   std::string text;
+
+   switch (code)
+   {
+   case Errors::FILE_OPEN_FAILED:
+      text = "FILE_OPEN_FAILED";
+      break;
+   case Errors::SIZE_DETERMINATION_FAILED:
+      text = "SIZE_DETERMINATION_FAILED";
+      break;
+   case Errors::MEMORY_ALLOCATION_FAILED:
+      text = "MEMORY_ALLOCATION_FAILED";
+      break;
+   case Errors::READ_FAILED:
+      text = "READ_FAILED";
+      break;
+   case Errors::FILE_CLOSE_FAILED:
+      text = "FILE_CLOSE_FAILED";
+      break;
+
+   default:
+      text = "SUCCESSFUL";
+      break;
+   }
+
+   return text;
 }
