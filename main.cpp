@@ -9,7 +9,7 @@
 enum Errors
 {
    FILE_OPEN_FAILED = -5,
-   SIZE_DETERMINATION_FAILED,
+   length_DETERMINATION_FAILED,
    MEMORY_ALLOCATION_FAILED,
    READ_FAILED,
    FILE_CLOSE_FAILED
@@ -22,20 +22,40 @@ Errors read_file_code();
 int main()
 {
    read_file_try();
-   auto errorCode = read_file_code();
-
+   Errors errorCode = read_file_code();
+   std::cout << errorCode << std::endl;
    return EXIT_SUCCESS;
 }
 
 // Implementations
 void read_file_try()
 {
-   std::string filename = "";
-   // std::string filename = "test.txt";
+   std::string filename = "test.txt";
    try
    {
       std::ifstream file(filename);
 
+      if (!file.is_open())
+         throw fileOpenFailed();
+
+      file.seekg(0, file.end);
+      auto length = file.tellg();
+      // For test 'readFailed', comment line under this
+      file.seekg(0, file.beg);
+
+      if (length <= 0)
+         throw sizeDeterminationFailed();
+
+      char *buff = new char[length];
+      if (buff == nullptr)
+         throw memoryAllocationFailed();
+
+      if (!file.read(buff, length))
+         throw readFailed();
+
+      file.close();
+      if (file.fail())
+         throw fileClosedFailed();
    }
    catch (fileOpenFailed &ex)
    {
