@@ -7,7 +7,7 @@ struct fileOpenFailed : public std::exception
 {
    const char *what() const noexcept override
    {
-      return "File is exist or filename is not right.";
+      return "File is not exist or filename is not right.";
    }
 };
 
