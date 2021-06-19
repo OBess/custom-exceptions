@@ -1,5 +1,6 @@
 // C++
 #include <iostream>
+#include <fstream>
 
 // Custom
 #include "include/custom_exceptions.hpp"
@@ -29,11 +30,40 @@ int main()
 // Implementations
 void read_file_try()
 {
+   std::string filename = "";
+   // std::string filename = "test.txt";
+   try
+   {
+      std::ifstream file(filename);
 
+   }
+   catch (fileOpenFailed &ex)
+   {
+      std::cout << ex.what() << std::endl;
+   }
+   catch (sizeDeterminationFailed &ex)
+   {
+      std::cout << ex.what() << std::endl;
+   }
+   catch (memoryAllocationFailed &ex)
+   {
+      std::cout << ex.what() << std::endl;
+   }
+   catch (readFailed &ex)
+   {
+      std::cout << ex.what() << std::endl;
+   }
+   catch (fileClosedFailed &ex)
+   {
+      std::cout << ex.what() << std::endl;
+   }
+   catch (...)
+   {
+      std::cout << "Unexpected error!" << std::endl;
+   }
 }
 
 Errors read_file_code()
 {
    return Errors::FILE_CLOSE_FAILED;
 }
-
